@@ -4,6 +4,7 @@ import mongoose, { Schema, type Document, type Model, type Types } from "mongoos
 export interface IBooking extends Document {
   eventId: Types.ObjectId;
   email: string;
+  slug: string;
   createdAt: Date;
   updatedAt: Date;
 }
