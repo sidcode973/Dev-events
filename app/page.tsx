@@ -2,6 +2,7 @@ import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
 import {IEvent} from "@/database";
 import {cacheLife} from "next/cache";
+import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -10,9 +11,7 @@ const Page = async () => {
     cacheLife('hours')
     const response = await fetch(`${BASE_URL}/api/events`);
     if (!response.ok) {
-         const text = await response.text(); // Get the "The deployment..." message
-        console.error("Vercel Error Page:", text);
-        return { events: [] }; // Return empty data so the build finishes
+         notFound();
       }
     const { events } = await response.json();
 
