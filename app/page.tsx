@@ -9,6 +9,11 @@ const Page = async () => {
     'use cache';
     cacheLife('hours')
     const response = await fetch(`${BASE_URL}/api/events`);
+    if (!response.ok) {
+         const text = await response.text(); // Get the "The deployment..." message
+        console.error("Vercel Error Page:", text);
+        return { events: [] }; // Return empty data so the build finishes
+      }
     const { events } = await response.json();
 
     return (
